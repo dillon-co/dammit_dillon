@@ -16,6 +16,13 @@ class PagesController < ApplicationController
     @donations = Donation.all
     @new_donation = Donation.new
   end
+
+  def donation_paid
+    @donation = Donation.find(params[:id])
+    @donation.status = :completed
+    @donation.save
+    render json: { status: "success" }
+  end  
   
   def about
   end  

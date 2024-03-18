@@ -9,7 +9,7 @@ class Donation < ApplicationRecord
 
   def create_lightning_invoice
     response = HTTParty.post(ENV['INVOICE_URL'], 
-                            body: { out: false, amount: amount_in_sats, memo: "Dammit Dillon Donation", webhook: "https://rainforest-payments.herokuapp.com/api/v1/invoices/#{self.id}/paid" }.to_json, 
+                            body: { out: false, amount: amount_in_sats, memo: "Dammit Dillon Donation", webhook: "https://dammit-dillon-66f830e32a1b.herokuapp.com/donation_paid/#{id}" }.to_json, 
                             headers: { 'X-Api-Key' => ENV['INVOICE_API_KEY'], 'Content-Type' => 'application/json'} 
                             )
     if response.success?

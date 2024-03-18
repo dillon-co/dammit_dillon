@@ -8,8 +8,10 @@ class ArtWork < ApplicationRecord
 
   def create_variants
     # create a variant for each size
+
     # 20x15, 30x22, 42x31
-    # 8x10 = 0, 16x20 = 1, 24x36 = 2
+    #   0,     1,     2
+    
     [0, 1, 2].each do |size|
       # create a variant with the size
       variant = Variant.create(

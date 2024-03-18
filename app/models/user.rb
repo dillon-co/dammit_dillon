@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :shipping_infos
   has_many :donations 
 
+  enum role: { user: 0, admin: 1 }
 end

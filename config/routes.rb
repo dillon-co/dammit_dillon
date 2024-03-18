@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'how-it-works' => 'pages#how_it_works', as: :how_it_works
   get 'timeline' => 'pages#timeline', as: :timeline
   get 'dashboard' => 'pages#dashboard', as: :dashboard
+  post 'donation_paid/:id' => 'pages#donation_paid', as: :donation_paid
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
