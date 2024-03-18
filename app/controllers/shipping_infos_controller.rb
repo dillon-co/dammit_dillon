@@ -1,0 +1,2 @@
+class ShippingInfosController < ApplicationController
+end

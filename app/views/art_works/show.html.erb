@@ -1,0 +1,354 @@
+
+<div class="bg-gray-50">
+    <!-- Product -->
+    <div class="bg-white">
+      <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pb-32 sm:pt-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+        <!-- Product details -->
+        <div class="lg:max-w-lg lg:self-end">
+
+          <div class="mt-4">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><%= @art_work.title %></h1>
+          </div>
+
+          <section aria-labelledby="information-heading" class="mt-4">
+            <h2 id="information-heading" class="sr-only">Product information</h2>
+
+        
+            <div class="mt-4 space-y-6">
+              <p class="text-base text-gray-500"><%= @art_work.description %></div>
+            <div class="mt-6 flex items-center">
+              <svg class="h-5 w-5 flex-shrink-0 text-green-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+              </svg>
+              <p class="ml-2 text-sm text-gray-500">In stock and ready to ship</p>
+            </div>
+          </section>
+        </div>
+
+        <!-- Product image -->
+        <div class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
+          <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
+            
+            <%= image_tag @art_work.main_image, class: 'object-scale-down' %>
+          </div>
+          
+        </div>
+
+        <!-- Product form -->
+        <div class="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
+          <section aria-labelledby="options-heading">
+            <h2 id="options-heading" class="sr-only">Product options</h2>
+
+            <%
+=begin%>
+ <form> 
+<%
+=end%>
+              <div class="sm:flex sm:justify-between">
+                <!-- Size selector -->
+                <fieldset>
+                  <legend class="block text-sm font-medium text-gray-700">Select Your Size</legend>
+                  <div class="mt-1 grid grid-cols-4 gap-4 " data-controller="order">
+                    <!-- Active: "ring-2 ring-indigo-500" -->
+                    <div  class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none" data-action="click->order#selectSmall" data-order-target="size">
+                      <input type="radio" name="size-choice" value="18L" class="sr-only" aria-labelledby="size-choice-0-label" aria-describedby="size-choice-0-description">
+                      <p id="size-choice-0-label" class="text-base font-medium text-gray-900">Small</p>
+                      <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">20" x 15"</p>
+                      <!--
+                        Active: "border", Not Active: "border-2"
+                        Checked: "border-indigo-500", Not Checked: "border-transparent"
+                      -->
+                      <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
+                    </div>
+                    <!-- Active: "ring-2 ring-indigo-500" -->
+                    <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none" data-action="click->order#selectMedium" data-order-target="size">
+                      <input type="radio" name="size-choice" value="20L" class="sr-only" aria-labelledby="size-choice-1-label" aria-describedby="size-choice-1-description">
+                      <p id="size-choice-1-label" class="text-base font-medium text-gray-900">Medium</p>
+                      <p id="size-choice-1-description" class="mt-1 text-sm text-gray-500">30" x 22"</p>
+                      <!--
+                        Active: "border", Not Active: "border-2"
+                        Checked: "border-indigo-500", Not Checked: "border-transparent"
+                      -->
+                      <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
+                    </div>
+                    <div class="relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none" data-action="click->order#selectLarge" data-order-target="size">
+                      <input type="radio" name="size-choice" value="20L" class="sr-only" aria-labelledby="size-choice-1-label" aria-describedby="size-choice-1-description">
+                      <p id="size-choice-1-label" class="text-base font-medium text-gray-900">Large</p>
+                      <p id="size-choice-1-description" class="mt-1 text-sm text-gray-500">42" x 31"</p>
+                      <!--
+                        Active: "border", Not Active: "border-2"
+                        Checked: "border-indigo-500", Not Checked: "border-transparent"
+                      -->
+                      <div class="pointer-events-none absolute -inset-px rounded-lg border-2" aria-hidden="true"></div>
+                    </div>
+                    <div class="relative block rounded-lg pt-6 p-4 focus:outline-none">
+                      <p id="size-choice-1-label" class="text-sm text-gray-500">Price</p>
+                      <p id="size-choice-1-description" class="mt-1 text-base font-medium text-gray-900" data-order-target="price"></p>
+                    </div>
+                  </div>
+                </fieldset>
+                <div>
+                  <h1></h1>
+                </div>
+              </div>
+
+              <div class="mt-10">
+                <div data-controller="modal">
+                  <dialog data-modal-target="dialog" class="p-8 rounded-lg backdrop:bg-black/80">
+                    <%= render 'layouts/forms/shipping_address_form' %>
+                   
+
+                  </dialog>
+
+                
+                  <button 
+                          data-action="modal#open" 
+                          class="flex w-full items-center justify-center rounded-md 
+                                border border-transparent bg-indigo-600 px-8 py-3 
+                                text-base font-medium text-white hover:bg-indigo-700 
+                                focus:outline-none focus:ring-2 focus:ring-indigo-500 
+                                focus:ring-offset-2 focus:ring-offset-gray-50">
+                    Order
+                  </button>
+                </div>
+              </div>
+              <div class="mt-6 text-center">
+                <a href="#" class="group inline-flex text-base font-medium">
+                  <svg class="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                  <span class="text-gray-500 hover:text-gray-700">Lifetime Guarantee</span>
+                  
+                </a>
+              </div>
+            
+          </section>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+      <!-- Details section -->
+      <section aria-labelledby="details-heading">
+        <div class="flex flex-col items-center text-center">
+          <h2 id="details-heading" class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">The Fine Details</h2>
+          <p class="mt-3 max-w-3xl text-lg text-gray-600">All the art is printed with the highest quality Glicee printers, inspected for quality then carefully packaged so it's not damaged during shipping.</p>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:gap-x-8">
+          <div>
+            <div class="aspect-h-2 aspect-w-3 w-full overflow-hidden rounded-lg">
+              <img src="https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg" alt="Drawstring top with elastic loop closure and textured interior padding." class="h-full w-full object-cover object-center">
+            </div>
+            <p class="mt-8 text-base text-gray-500">The 20L model has enough space for 370 candy bars, 6 cylinders of chips, 1,220 standard gumballs, or any combination of on-the-go treats that your heart desires. Yes, we did the math.</p>
+          </div>
+          <div>
+            <div class="aspect-h-2 aspect-w-3 w-full overflow-hidden rounded-lg">
+              <img src="https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-02.jpg" alt="Front zipper pouch with included key ring." class="h-full w-full object-cover object-center">
+            </div>
+            <p class="mt-8 text-base text-gray-500">Up your snack organization game with multiple compartment options. The quick-access stash pouch is ready for even the most unexpected snack attacks and sharing needs.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Policies section -->
+      <section aria-labelledby="policy-heading" class="mt-16 lg:mt-24">
+        <h2 id="policy-heading" class="sr-only">Our policies</h2>
+        <div class="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
+          <div>
+            <img src="https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg" alt="" class="h-24 w-auto">
+            <h3 class="mt-6 text-base font-medium text-gray-900">Free delivery to the US and canada</h3>
+            <p class="mt-3 text-base text-gray-500">Because it would be dumb if we didn't</p>
+          </div>
+          <div>
+            <img src="https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg" alt="" class="h-24 w-auto">
+            <h3 class="mt-6 text-base font-medium text-gray-900">24/7 Customer Support</h3>
+            <p class="mt-3 text-base text-gray-500">Reach out and we'll get back to you</p>
+          </div>
+          <div>
+            <img src="https://tailwindui.com/img/ecommerce/icons/icon-fast-checkout-light.svg" alt="" class="h-24 w-auto">
+            <h3 class="mt-6 text-base font-medium text-gray-900">Fast Shopping Cart</h3>
+            <p class="mt-3 text-base text-gray-500">Look at the cart in that icon, there&#039;s never been a faster cart. What does this mean for the actual checkout experience? I don&#039;t know.</p>
+          </div>
+          <div>
+            <img src="https://tailwindui.com/img/ecommerce/icons/icon-gift-card-light.svg" alt="" class="h-24 w-auto">
+            <h3 class="mt-6 text-base font-medium text-gray-900">Gift Cards</h3>
+            <p class="mt-3 text-base text-gray-500">We sell these hoping that you will buy them for your friends and they will never actually use it. Free money for us, it&#039;s great.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section aria-labelledby="reviews-heading" class="bg-white">
+      <div class="mx-auto max-w-2xl px-4 py-24 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-32">
+        <div class="lg:col-span-4">
+          <h2 id="reviews-heading" class="text-2xl font-bold tracking-tight text-gray-900">Customer Reviews</h2>
+
+          <div class="mt-3 flex items-center">
+            <div>
+              <div class="flex items-center">
+                <!-- Active: "text-yellow-400", Default: "text-gray-300" -->
+                <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+                <svg class="h-5 w-5 flex-shrink-0 text-gray-300" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <p class="sr-only">4 out of 5 stars</p>
+            </div>
+            <p class="ml-2 text-sm text-gray-900">Based on 1624 reviews</p>
+          </div>
+
+          <div class="mt-6">
+            <h3 class="sr-only">Review data</h3>
+
+            <dl class="space-y-3">
+              <div class="flex items-center text-sm">
+                <dt class="flex flex-1 items-center">
+                  <p class="w-3 font-medium text-gray-900">5<span class="sr-only"> star reviews</span></p>
+                  <div aria-hidden="true" class="ml-1 flex flex-1 items-center">
+                    <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                    </svg>
+
+                    <div class="relative ml-3 flex-1">
+                      <div class="h-3 rounded-full border border-gray-200 bg-gray-100"></div>
+                      <div style="width: calc(1019 / 1624 * 100%)" class="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"></div>
+                    </div>
+                  </div>
+                </dt>
+                <dd class="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">63%</dd>
+              </div>
+              <div class="flex items-center text-sm">
+                <dt class="flex flex-1 items-center">
+                  <p class="w-3 font-medium text-gray-900">4<span class="sr-only"> star reviews</span></p>
+                  <div aria-hidden="true" class="ml-1 flex flex-1 items-center">
+                    <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                    </svg>
+
+                    <div class="relative ml-3 flex-1">
+                      <div class="h-3 rounded-full border border-gray-200 bg-gray-100"></div>
+                      <div style="width: calc(162 / 1624 * 100%)" class="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"></div>
+                    </div>
+                  </div>
+                </dt>
+                <dd class="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">10%</dd>
+              </div>
+              <div class="flex items-center text-sm">
+                <dt class="flex flex-1 items-center">
+                  <p class="w-3 font-medium text-gray-900">3<span class="sr-only"> star reviews</span></p>
+                  <div aria-hidden="true" class="ml-1 flex flex-1 items-center">
+                    <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                    </svg>
+
+                    <div class="relative ml-3 flex-1">
+                      <div class="h-3 rounded-full border border-gray-200 bg-gray-100"></div>
+                      <div style="width: calc(97 / 1624 * 100%)" class="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"></div>
+                    </div>
+                  </div>
+                </dt>
+                <dd class="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">6%</dd>
+              </div>
+              <div class="flex items-center text-sm">
+                <dt class="flex flex-1 items-center">
+                  <p class="w-3 font-medium text-gray-900">2<span class="sr-only"> star reviews</span></p>
+                  <div aria-hidden="true" class="ml-1 flex flex-1 items-center">
+                    <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                    </svg>
+
+                    <div class="relative ml-3 flex-1">
+                      <div class="h-3 rounded-full border border-gray-200 bg-gray-100"></div>
+                      <div style="width: calc(199 / 1624 * 100%)" class="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"></div>
+                    </div>
+                  </div>
+                </dt>
+                <dd class="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">12%</dd>
+              </div>
+              <div class="flex items-center text-sm">
+                <dt class="flex flex-1 items-center">
+                  <p class="w-3 font-medium text-gray-900">1<span class="sr-only"> star reviews</span></p>
+                  <div aria-hidden="true" class="ml-1 flex flex-1 items-center">
+                    <svg class="h-5 w-5 flex-shrink-0 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                    </svg>
+
+                    <div class="relative ml-3 flex-1">
+                      <div class="h-3 rounded-full border border-gray-200 bg-gray-100"></div>
+                      <div style="width: calc(147 / 1624 * 100%)" class="absolute inset-y-0 rounded-full border border-yellow-400 bg-yellow-400"></div>
+                    </div>
+                  </div>
+                </dt>
+                <dd class="ml-3 w-10 text-right text-sm tabular-nums text-gray-900">9%</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="mt-10">
+            <h3 class="text-lg font-medium text-gray-900">Share your thoughts</h3>
+            <p class="mt-1 text-sm text-gray-600">If you’ve used this product, share your thoughts with other customers</p>
+
+            <a href="#" class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-50 sm:w-auto lg:w-full">Write a review</a>
+          </div>
+        </div>
+
+        <div class="mt-16 lg:col-span-7 lg:col-start-6 lg:mt-0">
+          <h3 class="sr-only">Recent reviews</h3>
+
+          <div class="flow-root">
+            <div class="-my-12 divide-y divide-gray-200">
+              <div class="py-12">
+                <div class="flex items-center">
+                  <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80" alt="Emily Selman." class="h-12 w-12 rounded-full">
+                  <div class="ml-4">
+                    <h4 class="text-sm font-bold text-gray-900">Emily Selman</h4>
+                    <div class="mt-1 flex items-center">
+                      <!-- Active: "text-yellow-400", Default: "text-gray-300" -->
+                      <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                      </svg>
+                      <svg class="text-yellow-400 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <p class="sr-only">5 out of 5 stars</p>
+                  </div>
+                </div>
+
+                <div class="mt-4 space-y-6 text-base italic text-gray-600">
+                  <p>This is the bag of my dreams. I took it on my last vacation and was able to fit an absurd amount of snacks for the many long and hungry flights.</p>
+                </div>
+              </div>
+
+              <!-- More reviews... -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+</div>

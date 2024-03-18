@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  art_work: one
+  size: 1
+  width: 1
+  height: 1
+
+two:
+  art_work: two
+  size: 1
+  width: 1
+  height: 1
