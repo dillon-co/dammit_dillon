@@ -1,8 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-import {isWeb3, connectWeb3} from "./connect-wallet"
-import {Web3} from "web3"
+// import {isWeb3, connectWeb3} from "./connect-wallet"
+// import {Web3} from "web3"
 
 
 // document.getElementById("show-balance").addEventListener('click', async()=>{

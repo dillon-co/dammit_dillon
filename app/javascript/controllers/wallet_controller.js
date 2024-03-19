@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import {isWeb3, connectWeb3} from "../connect-wallet"
-import {Web3} from "web3"
+// import {isWeb3, connectWeb3} from "../connect-wallet"
+// import {Web3} from "web3"
 
 export default class extends Controller {
   connect() {
