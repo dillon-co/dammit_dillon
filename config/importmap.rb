@@ -8,4 +8,5 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "web3", to: "https://ga.jspm.io/npm:web3@1.8.0/dist/web3.min.js"
 pin "hardhat", to: "https://cdn.jsdelivr.net/npm/hardhat-request@0.0.1/lib/index.min.js"
 pin "tailwindcss-stimulus-components", to: "tailwindcss-stimulus-components.js"
+pin "qrcode", to: "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/lib/browser.min.js"
 # pin "@openzeppelin/contracts", to: "https://cdn.jsdelivr.net/npm/@openzeppelin/contracts@4.8.3/+esm"pin "tailwindcss-stimulus-components" # @5.0.2

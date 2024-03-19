@@ -1,4 +1,14 @@
 <div>
-  <h1 class="font-bold text-4xl">Donations#show</h1>
-  <p>Find me in app/views/donations/show.html.erb</p>
+  <div class="bg-white px-6 py-24 sm:py-32 lg:px-8" data-controller='donations'>
+  <div class="mx-auto max-w-2xl text-center  text-wrap">
+    <p class="text-base font-semibold leading-7 text-indigo-600">Contribute to humanity</p>
+    <h2 class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Here's your lightning invoice</h2>
+    <p data-donations-target='isCopied' class="hidden">Copied!</p>
+    <input readonly class="mt-6 text-lg leading-8 text-gray-600" data-donations-target='hash'value=<%= @donation.payment_request %> /> ...
+    <button class="mt-2" data-action="donations#copy">Copy to Clipboard</button>
+    <%=@svg.html_safe%>
+    
+  </div>
+</div>
+
 </div>

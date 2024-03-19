@@ -17,6 +17,9 @@ class DonationsController < ApplicationController
 
   def show
     @donation = Donation.find(params[:id])
+    @qrcode = RQRCode::QRCode.new(@donation.payment_request)
+
+    @svg = @qrcode.as_svg(offset: 0, color: '000', shape_rendering: 'crispEdges', module_size: 6)
   end
 
   private

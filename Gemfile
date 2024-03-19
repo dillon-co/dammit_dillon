@@ -48,6 +48,7 @@ gem "bootsnap", require: false
 gem "devise"
 # gem 'faraday'
 gem "httparty"
+gem "rqrcode", "~> 2.0"
 # Use Sass to process CSS
 # gem "sassc-rails"
 
