@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :donations
   resources :orders
   get 'cart/show'
   resources :shipping_infos
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
   get 'how-it-works' => 'pages#how_it_works', as: :how_it_works
   get 'timeline' => 'pages#timeline', as: :timeline
   get 'dashboard' => 'pages#dashboard', as: :dashboard
+  get 'mission' => 'pages#mission', as: :mission
+
   post 'donation_paid/:id' => 'pages#donation_paid', as: :donation_paid
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -2,6 +2,7 @@ class ArtWorksController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create]
     def index
         @current_user = current_user
+        @user_is_admin = @current_user && @current_user&.admin?
         @art_works = ArtWork.all
     end
 

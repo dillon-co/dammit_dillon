@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     @donation_count = Donation.count
     @donations_total = Donation.sum(:amount_in_sats)
     @highest_donation = Donation.maximum(:amount_in_sats)
-    @user_contributions = current_user.donations.sum(:amount_in_sats)
+    @user_contributions = user_signed_in? ? current_user.donations.sum(:amount_in_sats) : "Sign In to see your contributions."
     @donations = Donation.all
     @new_donation = Donation.new
   end
@@ -25,6 +25,9 @@ class PagesController < ApplicationController
   end  
   
   def about
+  end
+  
+  def mission
   end  
 
   def how_it_works

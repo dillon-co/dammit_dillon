@@ -1,7 +1,7 @@
 <div class="bg-white">
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-    <h2 class="text-xl font-bold text-gray-900">Art Work.</h2>
-    <% if @current_user.role == "admin" %>
+    <h2 class="text-xl font-bold text-gray-900">Art Work</h2>
+    <% if @user_is_admin %>
       <%= link_to "Add Art Piece", new_art_work_path %>
     <% end %>
     <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
@@ -18,7 +18,7 @@
           </div>
           <div class="absolute inset-x-0 top-0 flex h-72 items-end justify-end overflow-hidden rounded-lg p-4">
             <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"></div>
-            <p class="relative text-lg font-semibold text-white">From 0.15 ETH</p>
+            <p class="relative text-lg font-semibold text-white">From 0.007 BTC</p>
           </div>
         </div>
         <div class="mt-6">
